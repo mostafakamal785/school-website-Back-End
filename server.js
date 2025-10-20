@@ -12,11 +12,10 @@ import dbMongooseConect from './config/db.js'; // Database connection function
 dotenv.config();
 
 // Get configuration from environment variables
-const DATABASEURL = process.env.DATABASE_URL; // MongoDB connection URL
 const PORT = process.env.PORT; // Server port
 
 // Connect to MongoDB database
-dbMongooseConect(DATABASEURL);
+dbMongooseConect();
 
 // Start the server
 app.listen(PORT, () => {

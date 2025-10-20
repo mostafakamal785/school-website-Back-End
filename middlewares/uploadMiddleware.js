@@ -1,6 +1,6 @@
-import multer from "multer";
-import path from "path";
-import fs from "fs";
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
 
 // 🧩 Configure storage engine
 const storage = multer.diskStorage({
@@ -9,17 +9,17 @@ const storage = multer.diskStorage({
     const studentId = req.body.studentId;
 
     if (!userId && !studentId) {
-      return cb(new Error("userId or studentId is required"), false);
+      return cb(new Error('userId or studentId is required'), false);
     }
 
-    let uploadPath = "";
+    let uploadPath = '';
 
-    if (file.fieldname === "profilePic") {
-      uploadPath = path.join("uploads", "profiles", `user_${userId}`);
-    } else if (file.fieldname === "document") {
-      uploadPath = path.join("uploads", "students", `student_${studentId || userId}`, "documents");
+    if (file.fieldname === 'profilePic') {
+      uploadPath = path.join('uploads', 'profiles', `user_${userId}`);
+    } else if (file.fieldname === 'document') {
+      uploadPath = path.join('uploads', 'students', `student_${studentId || userId}`, 'documents');
     } else {
-      return cb(new Error("Invalid field name"), false);
+      return cb(new Error('Invalid field name'), false);
     }
 
     fs.mkdirSync(uploadPath, { recursive: true });
@@ -35,16 +35,16 @@ const storage = multer.diskStorage({
 
 // 🧱 File validation rules
 const fileFilter = (req, file, cb) => {
-  const allowedImageTypes = [".jpg", ".jpeg", ".png"];
-  const allowedDocTypes = [".pdf", ".jpg", ".jpeg", ".png"];
+  const allowedImageTypes = ['.jpg', '.jpeg', '.png'];
+  const allowedDocTypes = ['.pdf', '.jpg', '.jpeg', '.png'];
   const ext = path.extname(file.originalname).toLowerCase();
 
-  if (file.fieldname === "profilePic" && allowedImageTypes.includes(ext)) {
+  if (file.fieldname === 'profilePic' && allowedImageTypes.includes(ext)) {
     cb(null, true);
-  } else if (file.fieldname === "document" && allowedDocTypes.includes(ext)) {
+  } else if (file.fieldname === 'document' && allowedDocTypes.includes(ext)) {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file type"), false);
+    cb(new Error('Invalid file type'), false);
   }
 };
 
