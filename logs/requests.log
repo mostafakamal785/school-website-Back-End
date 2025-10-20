@@ -1,0 +1,7 @@
+::1 - - [20/Oct/2025:13:48:42 +0000] "GET /api/auth/register HTTP/1.1" 404 156 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:49:27 +0000] "GET /api/auth/register HTTP/1.1" 404 156 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:51:05 +0000] "GET /api/auth/register HTTP/1.1" 404 156 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:51:43 +0000] "GET / HTTP/1.1" 200 18 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:52:11 +0000] "GET /api/auth HTTP/1.1" 404 147 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:52:31 +0000] "POST /api/auth/register HTTP/1.1" 500 73 "-" "PostmanRuntime/7.49.0"
+::1 - - [20/Oct/2025:13:53:58 +0000] "POST /api/auth/register HTTP/1.1" 409 66 "-" "PostmanRuntime/7.49.0"
