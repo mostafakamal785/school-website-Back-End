@@ -1,18 +1,10 @@
-/**
- * User model for MongoDB using Mongoose.
- * Defines the schema for user documents in the database.
- */
-
-// Import Mongoose for MongoDB object modeling
+// models/User.js
 import mongoose from "mongoose";
-
-// Define the User schema
-const User = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: String,
-  emial: String,
-  passwordHash: String,
-  role: { type: String, enum: ["admin", "teacher", "student"] },
+  email: { type: String, unique: true },
+  password: String,
+  role: { type: String, enum: ["admin", "teacher", "student"], default: "student" },
   profilePic: String,
 });
-
-export default User;
+export default mongoose.model("User", userSchema);

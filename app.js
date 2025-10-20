@@ -9,6 +9,11 @@ import morgan from "morgan";
 import errorHandler from "./middlewares/errorMiddleware.js";
 import authRoutes from "./routes/authRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
+import teacherRoutes from "./routes/teacherRoutes.js";
+import courseRoutes from "./routes/courseRoutes.js";
+import enrollmentRoutes from "./routes/enrollmentRoutes.js";
 
 const app = express();
 
@@ -31,6 +36,12 @@ app.use(morgan("combined", { stream: accessHistory }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/users", userRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/teachers", teacherRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/enrollments", enrollmentRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/upload", uploadRoutes);
