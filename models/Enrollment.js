@@ -6,4 +6,4 @@ const Enrollment = new mongoose.Schema({
   enrolledAt: Date,
 });
 
-export default Enrollment;
+export default mongoose.model("Enrollment",Enrollment);

@@ -7,5 +7,4 @@ const Course = new mongoose.Schema({
   teacher: { type: ObjectId, ref: "Teacher" },
   maxStudents: Number,
 });
-
-export default Course;
+export default mongoose.model("Course",Course);

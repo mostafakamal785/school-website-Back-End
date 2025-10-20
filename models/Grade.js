@@ -9,4 +9,4 @@ const Grade = new mongoose.Schema({
   givenBy: { type: ObjectId, ref: "Teacher" },
 });
 
-export default Grade;
+export default mongoose.model("Grade",Grade);

@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 
 import errorHandler from './middlewares/errorMiddleware.js';
-
+import uploadRoutes from './routes/uploadRoutes.js';
 
 import authRoutes from './routes/authRoutes.js';
 
@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
+app.use("/api/upload", uploadRoutes);
 
 
 app.use(errorHandler);
