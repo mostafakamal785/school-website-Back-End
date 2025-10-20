@@ -1,9 +1,7 @@
+// models/Enrollment.js
 import mongoose from "mongoose";
-
-const Enrollment = new mongoose.Schema({
-  student: { type: ObjectId, ref: "Student" },
-  course: { type: ObjectId, ref: "Course" },
-  enrolledAt: Date,
+const enrollmentSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
 });
-
-export default mongoose.model("Enrollment",Enrollment);
+export default mongoose.model("Enrollment", enrollmentSchema);
