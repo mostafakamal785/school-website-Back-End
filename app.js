@@ -1,48 +1,41 @@
-/**
- * Main Express application setup.
- * Configures middleware, routes, and error handling for the school website backend.
- */
-
 // Import required modules
 import express from 'express';
 import path from 'path';
-import fs from 'fs';
-import errorHandler from './middlewares/errorMiddleware.js';
-import uploadRoutes from './routes/uploadRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-import helmet from 'helmet';
+import fs from 'fs';import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 // Create Express application instance
+import errorHandler from './middlewares/errorMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+
 const app = express();
 
-// Configure rate limiting to prevent abuse
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Set up request logging to file
 const accessHistory = fs.createWriteStream(path.resolve('logs', 'requests.log'), { flags: 'a' });
 
-// Apply security and utility middleware
-app.use(limiter); // Rate limiting
-app.use(helmet()); // Security headers
-app.use(cookieParser()); // Parse cookies
-app.use(morgan('combined', { stream: accessHistory })); // HTTP request logging
+app.use(limiter);
+app.use(helmet());
+app.use(cookieParser());
+app.use(morgan('combined', { stream: accessHistory }));
 
-// Parse JSON and URL-encoded request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 
-// Apply global error handling middleware
 app.use(errorHandler);
+
 export default app;
