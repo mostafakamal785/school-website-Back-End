@@ -6,6 +6,9 @@ import fs from 'fs';
 import errorHandler from './middlewares/errorMiddleware.js';
 
 
+import authRoutes from './routes/authRoutes.js';
+
+
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
@@ -30,6 +33,7 @@ app.use(morgan('combined', { stream: accessHistory }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/api/auth', authRoutes);
 
 
 app.use(errorHandler);
