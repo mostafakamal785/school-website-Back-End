@@ -6,4 +6,4 @@ const Teacher = new mongoose.Schema({
   phone: String,
 });
 
-export default Teacher;
+export default mongoose.model("Teacher",Teacher);

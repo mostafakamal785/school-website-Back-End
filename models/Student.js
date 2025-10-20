@@ -8,4 +8,4 @@ const Student = new mongoose.Schema({
   documents: [String],
 });
 
-export default Student;
+export default mongoose.model("Student",Student);

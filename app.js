@@ -8,6 +8,7 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import errorHandler from './middlewares/errorMiddleware.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -40,6 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Mount authentication routes
 app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Apply global error handling middleware
 app.use(errorHandler);

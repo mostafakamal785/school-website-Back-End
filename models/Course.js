@@ -14,6 +14,4 @@ const Course = new mongoose.Schema({
   teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }, // Reference to Teacher model
   maxStudents: Number, // Maximum number of students allowed
 });
-
-// Export the Course model
-export default mongoose.model("Course", Course);
+export default mongoose.model("Course",Course);
