@@ -1,8 +1,17 @@
-import mongoose from 'mongoose';
+// config/db.js
+import mongoose from "mongoose";
 
-const dbMongooseConect = async function (url) {
-  await mongoose.connect(url);
-  console.log('db connect');
+const dbMongooseConnect = async () => {
+  try {
+    const uri = process.env.MONGO_URI;
+    if (!uri) throw new Error("❌ MONGO_URI is missing from .env file");
+
+    await mongoose.connect(uri); // 👈 كده كفاية
+    console.log("✅ MongoDB connected successfully");
+  } catch (error) {
+    console.error("❌ MongoDB connection failed:", error.message);
+    process.exit(1);
+  }
 };
 
-export default dbMongooseConect;
+export default dbMongooseConnect;
