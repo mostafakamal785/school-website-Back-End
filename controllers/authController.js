@@ -1,4 +1,10 @@
-// import User from '../models/User.js';
+/**
+ * Controller for handling user authentication operations.
+ * Includes login, registration, verification, logout, and password reset functionalities.
+ */
+
+// Import required modules
+import User from '../models/User.js';
 import {
   generateAccesToken,
   generateRefreshToken,
@@ -9,6 +15,13 @@ import crypto from 'crypto';
 import sendEmail from '../utils/sendEmail.js';
 import jwt from 'jsonwebtoken';
 
+/**
+ * Logs in a user by verifying email and password.
+ * Sets access and refresh tokens as HTTP-only cookies.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const logInUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -68,9 +81,16 @@ export const logInUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Registers a new user with name, email, password, and optional role.
+ * Sends a verification email after successful registration.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const registerUser = async (req, res, next) => {
   try {
-    const { name, email, password, age, role } = req.body;
+    const { name, email, password, role } = req.body;
     const isRepet = await User.findOne({ email });
 
     if (isRepet) {
@@ -85,7 +105,6 @@ export const registerUser = async (req, res, next) => {
     const newUser = await User.create({
       name,
       email,
-      age: age ? age : null,
       role: role || 'user',
       password: hashdPassword,
       isVerified: false,
@@ -111,6 +130,13 @@ export const registerUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Verifies a user's email using a verification token.
+ * Marks the user as verified in the database.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const verifyUser = async (req, res, next) => {
   try {
     const token = req.params.token;
@@ -133,6 +159,12 @@ export const verifyUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Logs out a user by clearing access and refresh token cookies.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const logoutUser = async (req, res, next) => {
   try {
     res.clearCookie('access-token', {
@@ -151,6 +183,13 @@ export const logoutUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Initiates password reset by sending a reset email to the user.
+ * Generates a secure reset token and stores it in the database.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const forgotPassword = async (req, res, next) => {
   try {
     const email = req.body.email;
@@ -182,6 +221,13 @@ export const forgotPassword = async (req, res, next) => {
   }
 };
 
+/**
+ * Resets a user's password using a valid reset token.
+ * Validates the token and updates the password in the database.
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 export const resetPassword = async (req, res, next) => {
   try {
     const { password } = req.body;

@@ -1,9 +1,24 @@
-import app from './app.js';
-import dotenv from 'dotenv';
+/**
+ * Server entry point for the school website backend.
+ * Sets up environment variables, database connection, and starts the Express server.
+ */
+
+// Import required modules
+import app from './app.js'; // Main Express application
+import dotenv from 'dotenv'; // Environment variable loader
+import dbMongooseConect from './config/db.js'; // Database connection function
+
+// Load environment variables from .env file
 dotenv.config();
 
-const PORT = process.env.PORT;
+// Get configuration from environment variables
+const DATABASEURL = process.env.DATABASE_URL; // MongoDB connection URL
+const PORT = process.env.PORT; // Server port
 
+// Connect to MongoDB database
+dbMongooseConect(DATABASEURL);
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

@@ -1,11 +1,19 @@
+/**
+ * Course model for MongoDB using Mongoose.
+ * Defines the schema for course documents in the database.
+ */
+
+// Import Mongoose for MongoDB object modeling
 import mongoose from "mongoose";
 
+// Define the Course schema
 const Course = new mongoose.Schema({
-  title: String,
-  code: { type: String, unique: true },
-  description: String,
-  teacher: { type: ObjectId, ref: "Teacher" },
-  maxStudents: Number,
+  title: String, // Course title
+  code: { type: String, unique: true }, // Unique course code
+  description: String, // Course description
+  teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }, // Reference to Teacher model
+  maxStudents: Number, // Maximum number of students allowed
 });
 
-export default Course;
+// Export the Course model
+export default mongoose.model("Course", Course);
